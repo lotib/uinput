@@ -139,9 +139,9 @@ func createMultiTouch(path string, name []byte, minX int32, maxX int32, minY int
 
 // The contact will be held down at the coordinates specified
 func (c multiTouchContact) TouchDownAt(x int32, y int32) error {
-	var events []inputEvent
+	var events []InputEvent
 
-	events = append(events, inputEvent{
+	events = append(events, InputEvent{
 		Type:  evAbs,
 		Code:  absMtPositionX,
 		Value: x,
@@ -151,7 +151,7 @@ func (c multiTouchContact) TouchDownAt(x int32, y int32) error {
 		y--
 	}
 
-	events = append(events, inputEvent{
+	events = append(events, InputEvent{
 		Type:  evAbs,
 		Code:  absMtPositionY,
 		Value: y,
@@ -168,16 +168,16 @@ func (c multiTouchContact) TouchUp() error {
 	return c.sendAbsEvent(nil)
 }
 
-func (c multiTouchContact) sendAbsEvent(events []inputEvent) error {
-	var ev []inputEvent
+func (c multiTouchContact) sendAbsEvent(events []InputEvent) error {
+	var ev []InputEvent
 
-	ev = append(ev, inputEvent{
+	ev = append(ev, InputEvent{
 		Type:  evAbs,
 		Code:  absMtSlot,
 		Value: c.slot,
 	})
 
-	ev = append(ev, inputEvent{
+	ev = append(ev, InputEvent{
 		Type:  evAbs,
 		Code:  absMtTrackingId,
 		Value: c.tracking_id,

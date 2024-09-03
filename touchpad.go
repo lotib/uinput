@@ -182,7 +182,7 @@ func createTouchPad(path string, name []byte, minX int32, maxX int32, minY int32
 }
 
 func sendAbsEvent(deviceFile *os.File, xPos int32, yPos int32) error { // TODO: Perhaps move this to a more generic function? This conflicts with the gamepad ABS events which only have one value.
-	var ev [2]inputEvent
+	var ev [2]InputEvent
 	ev[0].Type = evAbs
 	ev[0].Code = absX
 	ev[0].Value = xPos

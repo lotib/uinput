@@ -150,7 +150,7 @@ func (vg vGamepad) HatRelease(direction HatDirection) error {
 }
 
 func (vg vGamepad) sendStickAxisEvent(absCode uint16, value float32) error {
-	ev := inputEvent{
+	ev := InputEvent{
 		Type:  evAbs,
 		Code:  absCode,
 		Value: denormalizeInput(value),
@@ -171,7 +171,7 @@ func (vg vGamepad) sendStickAxisEvent(absCode uint16, value float32) error {
 
 func (vg vGamepad) sendStickEvent(values map[uint16]float32) error {
 	for code, value := range values {
-		ev := inputEvent{
+		ev := InputEvent{
 			Type:  evAbs,
 			Code:  code,
 			Value: denormalizeInput(value),
@@ -226,7 +226,7 @@ func (vg vGamepad) sendHatEvent(direction HatDirection, action HatAction) error 
 		value = 0
 	}
 
-	ev := inputEvent{
+	ev := InputEvent{
 		Type:  evAbs,
 		Code:  event,
 		Value: value,

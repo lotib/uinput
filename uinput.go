@@ -180,7 +180,7 @@ func fetchSyspath(deviceFile *os.File) (string, error) {
 // by all currently available devices and resides in the main source file.
 func sendBtnEvent(deviceFile *os.File, keys []int, btnState int) (err error) {
 	for _, key := range keys {
-		buf, err := inputEventToBuffer(inputEvent{
+		buf, err := inputEventToBuffer(InputEvent{
 			Time:  syscall.Timeval{Sec: 0, Usec: 0},
 			Type:  evKey,
 			Code:  uint16(key),
@@ -196,7 +196,7 @@ func sendBtnEvent(deviceFile *os.File, keys []int, btnState int) (err error) {
 	return syncEvents(deviceFile)
 }
 
-func sendEvent(deviceFile *os.File, event *inputEvent) (err error) {
+func sendEvent(deviceFile *os.File, event *InputEvent) (err error) {
 	buf, err := inputEventToBuffer(*event)
 	if err != nil {
 		return fmt.Errorf("event could not be set: %v", err)
@@ -217,7 +217,7 @@ func sendBufferEvent(deviceFile *os.File, buffer []byte) (err error) {
 }
 
 func syncEvents(deviceFile *os.File) (err error) {
-	buf, err := inputEventToBuffer(inputEvent{
+	buf, err := inputEventToBuffer(InputEvent{
 		Time:  syscall.Timeval{Sec: 0, Usec: 0},
 		Type:  evSyn,
 		Code:  uint16(synReport),
@@ -229,7 +229,7 @@ func syncEvents(deviceFile *os.File) (err error) {
 	return err
 }
 
-func inputEventToBuffer(iev inputEvent) (buffer []byte, err error) {
+func inputEventToBuffer(iev InputEvent) (buffer []byte, err error) {
 	buf := bytes.NewBuffer(make([]byte, 0, 24))
 	err = binary.Write(buf, binary.LittleEndian, iev)
 	if err != nil {

@@ -80,7 +80,7 @@ func createDial(path string, name []byte) (fd *os.File, err error) {
 }
 
 func sendDialEvent(deviceFile *os.File, delta int32) error {
-	iev := inputEvent{
+	iev := InputEvent{
 		Time:  syscall.Timeval{Sec: 0, Usec: 0},
 		Type:  evRel,
 		Code:  relDial,

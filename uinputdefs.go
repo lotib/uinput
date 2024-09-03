@@ -78,7 +78,7 @@ type uinputUserDev struct {
 }
 
 // translated to go from input.h
-type inputEvent struct {
+type InputEvent struct {
 	Time  syscall.Timeval
 	Type  uint16
 	Code  uint16

@@ -23,7 +23,7 @@ type Keyboard interface {
 
 	// SendEvent send a buffer representing input event to the virtual keyboard device
 	// No synReport is automatically send to the device
-	SendEvent(event *inputEvent) error
+	SendEvent(event *InputEvent) error
 
 	// SendBufferEvent send a buffer representing input event to the virtual keyboard device
 	// No synReport is automatically send to the device
@@ -96,7 +96,7 @@ func (vk vKeyboard) KeyUp(key int) error {
 
 // SendEvent send a buffer representing input event to the virtual keyboard device
 // No synReport is automatically send to the device
-func (vk vKeyboard) SendEvent(event *inputEvent) error {
+func (vk vKeyboard) SendEvent(event *InputEvent) error {
 	return sendEvent(vk.deviceFile, event)
 }
 

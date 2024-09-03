@@ -260,7 +260,7 @@ func createMouse(path string, name []byte) (fd *os.File, err error) {
 }
 
 func sendRelEvent(deviceFile *os.File, eventCode uint16, pixel int32) error {
-	iev := inputEvent{
+	iev := InputEvent{
 		Time:  syscall.Timeval{Sec: 0, Usec: 0},
 		Type:  evRel,
 		Code:  eventCode,
