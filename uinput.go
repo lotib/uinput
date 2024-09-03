@@ -188,6 +188,9 @@ func sendBtnEvent(deviceFile *os.File, keys []int, btnState int) (err error) {
 		if err != nil {
 			return fmt.Errorf("key event could not be set: %v", err)
 		}
+
+		fmt.Printf("LIB BUFF %v\n", buf)
+
 		_, err = deviceFile.Write(buf)
 		if err != nil {
 			return fmt.Errorf("writing btnEvent structure to the device file failed: %v", err)
@@ -212,6 +215,9 @@ func sendEvent(deviceFile *os.File, event *InputEvent) (err error) {
 }
 
 func sendBufferEvent(deviceFile *os.File, buffer []byte) (err error) {
+
+	fmt.Printf("LIB BUFF %v\n", buffer)
+
 	_, err = deviceFile.Write(buffer)
 	if err != nil {
 		return fmt.Errorf("writing buffer event structure to the device file failed: %v", err)
