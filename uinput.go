@@ -201,6 +201,9 @@ func sendEvent(deviceFile *os.File, event *InputEvent) (err error) {
 	if err != nil {
 		return fmt.Errorf("event could not be set: %v", err)
 	}
+
+	fmt.Printf("LIB BUFF %v\n", buf)
+
 	_, err = deviceFile.Write(buf)
 	if err != nil {
 		return fmt.Errorf("writing buffer event structure to the device file failed: %v", err)
