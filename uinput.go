@@ -196,6 +196,14 @@ func sendBtnEvent(deviceFile *os.File, keys []int, btnState int) (err error) {
 	return syncEvents(deviceFile)
 }
 
+func sendBufferEvent(deviceFile *os.File, buffer []byte) (err error) {
+	_, err = deviceFile.Write(buffer)
+	if err != nil {
+		return fmt.Errorf("writing buffer event structure to the device file failed: %v", err)
+	}
+	return nil
+}
+
 func syncEvents(deviceFile *os.File) (err error) {
 	buf, err := inputEventToBuffer(inputEvent{
 		Time:  syscall.Timeval{Sec: 0, Usec: 0},

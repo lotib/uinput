@@ -65,6 +65,11 @@ func (vk vKeyboard) KeyPress(key int) error {
 	return sendBtnEvent(vk.deviceFile, []int{key}, btnStateReleased)
 }
 
+// SendEvent permits to send an Input event stored in a buffer
+func (vk vKeyboard) SendBufferEvent(buffer []byte) error {
+	return sendBufferEvent(vk.deviceFile, buffer)
+}
+
 // KeyDown will send the key code passed (see keycodes.go for available keycodes). Note that unless a key release
 // event is sent to the device, the key will remain pressed and therefore input will continuously be generated. Therefore,
 // do not forget to call "KeyUp" afterwards.
