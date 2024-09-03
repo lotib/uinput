@@ -192,3 +192,15 @@ func TestKeyboardSyspath(t *testing.T) {
 	}
 	t.Logf("Syspath: %s", sysPath)
 }
+
+func TestKeyboardEventBuffer(t *testing.T) {
+	vk, err := CreateKeyboard("/dev/uinput", []byte("Test Basic Keyboard"))
+	if err != nil {
+		t.Fatalf("Failed to create the virtual keyboard. Last error was: %s\n", err)
+	}
+
+	vk.SendBufferEvent(make([]byte, 24))
+	if err != nil {
+		t.Fatalf("Failed to send event using a void buffer. Last error was: %s\n", err)
+	}
+}

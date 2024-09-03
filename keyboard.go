@@ -21,6 +21,14 @@ type Keyboard interface {
 	// The key can be any of the predefined keycodes from keycodes.go.
 	KeyUp(key int) error
 
+	// SendEvent send a buffer representing input event to the virtual keyboard device
+	// No synReport is automatically send to the device
+	SendEvent(event *inputEvent) error
+
+	// SendBufferEvent send a buffer representing input event to the virtual keyboard device
+	// No synReport is automatically send to the device
+	SendBufferEvent(buffer []byte) error
+
 	// FetchSysPath will return the syspath to the device file.
 	FetchSyspath() (string, error)
 
@@ -84,6 +92,12 @@ func (vk vKeyboard) KeyUp(key int) error {
 	}
 
 	return sendBtnEvent(vk.deviceFile, []int{key}, btnStateReleased)
+}
+
+// SendEvent send a buffer representing input event to the virtual keyboard device
+// No synReport is automatically send to the device
+func (vk vKeyboard) SendEvent(event *inputEvent) error {
+	return sendEvent(vk.deviceFile, event)
 }
 
 // SendBufferEvent send a buffer representing input event to the virtual keyboard device
